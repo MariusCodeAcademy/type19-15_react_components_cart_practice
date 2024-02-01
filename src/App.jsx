@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import Header from './components/layout/Header';
 import ShopPage from './pages/shop/ShopPage';
+import SingleItemPage from './pages/shop/SingleItemPage';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/shop' element={<ShopPage />} />
+        <Route path='/shop/:itemId' element={<SingleItemPage />} />
         {/* <Route path='*' element={<NoMatch />} /> */}
       </Routes>
     </div>

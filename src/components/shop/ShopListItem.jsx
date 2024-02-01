@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const itemType = {
   id: 30,
   title: 'Key Holder',
@@ -20,11 +22,25 @@ const itemType = {
 export default function ShopListItem({ item }) {
   console.log('JSON.stringify(item) ===', JSON.stringify(item));
   return (
-    <div>
-      <img src={item.thumbnail} alt={item.title} />
-      <h3>{item.title}</h3>
-      <p>{item.price}</p>
-      <p>Category: {item.category}</p>
+    <div className='pt-0 pb-10 px-4 border flex flex-col '>
+      <Link className='flex items-center justify-center mt-5 ' to={`/shop/${item.id}`}>
+        <img
+          className='h-48 w-48 py-9 object-cover self-center'
+          src={item.thumbnail}
+          alt={item.title}
+        />
+      </Link>
+      <div className='text-sm text-slate-700'>
+        <h3 className=''>{item.title}</h3>
+        <p className='text-gray-400 my-3'>{item.price.toFixed(2)} $</p>
+        <p>
+          Category: <span className='font-semibold'>{item.category}</span>
+        </p>
+        {/* eina SingleItemPage  */}
+        <Link className='mt-5 inline-block' to={`/shop/${item.id}`}>
+          Read more
+        </Link>
+      </div>
     </div>
   );
 }
