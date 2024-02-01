@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Button from '../../UI/Button';
 
 const itemType = {
   id: 30,
@@ -38,8 +39,9 @@ export default function ShopListItem({ item }) {
         </p>
         {/* eina SingleItemPage  */}
         <Link className='mt-5 inline-block' to={`/shop/${item.id}`}>
-          Read more
+          <Button>Read more</Button>
         </Link>
+        <Button outline>Add to cart</Button>
       </div>
     </div>
   );

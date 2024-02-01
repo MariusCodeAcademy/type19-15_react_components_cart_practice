@@ -5,6 +5,27 @@ import ShopListItem from '../../components/shop/ShopListItem';
 
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
+  const [cartArr, setCartArr] = useState([]);
+
+  const cartObj = {
+    cItemId: 1,
+    prodId: 1,
+    title: 'Iphone',
+    qty: 1,
+    price: 799,
+  };
+
+  const addToCard = () => {
+    // ideti objekta i cart cartArr (simple)
+    // jei jau yra toksai objektas carte - padidinti quantity
+  };
+  const updateQtyCard = () => {
+    // tures atnaujinti qty skaiciu kazkuriame objekte
+  };
+  const removeFromCard = () => {
+    // pasalinti objeka is cartArr
+  };
+
   console.log('prodArr ===', prodArr);
   useEffect(() => {
     getApiData();
@@ -31,6 +52,12 @@ export default function ShopPage() {
       <p className='text-lg text-center my-4'>
         This is just like <strong>Oboulys</strong> Shop
       </p>
+
+      <ul>
+        {cartArr.map((cObj) => (
+          <li key={cObj.cItemId}>Cart Item</li>
+        ))}
+      </ul>
 
       <ul className='grid grid-cols-3'>
         {prodArr.map((pObj) => (
