@@ -15,7 +15,9 @@ export default function ShopPage() {
     price: 799,
   };
 
-  const addToCard = () => {
+  const addToCard = (itemId) => {
+    // surati item is prodArr kurio id yra === itemId
+    // suformuoti objekta (cartObj)
     // ideti objekta i cart cartArr (simple)
     // jei jau yra toksai objektas carte - padidinti quantity
   };
