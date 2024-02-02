@@ -20,6 +20,9 @@ export default function Header() {
           <NavLink className='block p-4 hover:bg-gray-800' to='/shop'>
             Shop
           </NavLink>
+          <NavLink className='block p-4 hover:bg-gray-800' to='/cart'>
+            Cart
+          </NavLink>
         </nav>
       </div>
     </header>
