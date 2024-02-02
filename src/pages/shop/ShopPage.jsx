@@ -62,7 +62,7 @@ export default function ShopPage() {
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
         {prodArr.map((pObj) => (
           <li key={pObj.id}>
-            <ShopListItem onAddToCart={add} item={pObj} />
+            <ShopListItem onAddToCart={() => add(pObj)} item={pObj} />
           </li>
         ))}
       </ul>
