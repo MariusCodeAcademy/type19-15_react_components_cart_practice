@@ -11,7 +11,7 @@ const itemObj = {
 export default function CartItem({ item }) {
   return (
     <div className='grid grid-cols-5'>
-      <img src={item.img} alt={item.title} />
+      <img className='h-16 w-16 object-cover' src={item.img} alt={item.title} />
       <h3>{item.title}</h3>
       <div>
         <button>+</button>

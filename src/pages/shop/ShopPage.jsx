@@ -97,13 +97,24 @@ export default function ShopPage() {
         This is just like <strong>Oboulys</strong> Shop
       </p>
 
-      <ul>
-        {cartArr.map((cObj) => (
-          <li key={cObj.cItemId}>
-            <CartItem item={cObj} />
+      {cartArr.length > 0 && (
+        <ul className='my-10'>
+          <li className='mb-5'>
+            <div className='grid grid-cols-5'>
+              <h3 className='uppercase text-xl'>Product Image</h3>
+              <h3 className='uppercase text-xl'>Product</h3>
+              <h3 className='uppercase text-xl'>Quantity</h3>
+              <h3 className='uppercase text-xl'>Price</h3>
+              <h3 className='uppercase text-xl'>Total</h3>
+            </div>
           </li>
-        ))}
-      </ul>
+          {cartArr.map((cObj) => (
+            <li key={cObj.cItemId}>
+              <CartItem item={cObj} />
+            </li>
+          ))}
+        </ul>
+      )}
 
       <ul className='grid grid-cols-3'>
         {prodArr.map((pObj) => (
