@@ -22,8 +22,8 @@ const itemType = {
   ],
 };
 
-export default function ShopListItem({ item }) {
-  console.log('JSON.stringify(item) ===', JSON.stringify(item));
+export default function ShopListItem({ item, onAddToCart }) {
+  // console.log('JSON.stringify(item) ===', JSON.stringify(item));
   return (
     <div className='pt-0 pb-10 px-4 border flex flex-col '>
       <Link className='flex items-center justify-center mt-5 ' to={`/shop/${item.id}`}>
@@ -46,7 +46,7 @@ export default function ShopListItem({ item }) {
               <FaBookReader className='mr-2' size={'20px'} /> Read more
             </Button>
           </Link>
-          <Button className='inline-flex' outline>
+          <Button onClick={() => onAddToCart(item.id)} className='inline-flex' outline>
             <span>Add to</span> <PiShoppingCartThin className='ml-2' size={'20px'} />
           </Button>
         </div>

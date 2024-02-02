@@ -16,8 +16,9 @@ export default function ShopPage() {
     price: 799,
   };
 
-  const addToCard = (itemId) => {
+  const addToCart = (itemId) => {
     // surati item is prodArr kurio id yra === itemId
+    console.log('addToCard itemId ===', itemId);
     // suformuoti objekta (cartObj)
     // ideti objekta i cart cartArr (simple)
     // jei jau yra toksai objektas carte - padidinti quantity
@@ -68,7 +69,7 @@ export default function ShopPage() {
       <ul className='grid grid-cols-3'>
         {prodArr.map((pObj) => (
           <li key={pObj.id}>
-            <ShopListItem item={pObj} />
+            <ShopListItem onAddToCart={addToCart} item={pObj} />
           </li>
         ))}
       </ul>
