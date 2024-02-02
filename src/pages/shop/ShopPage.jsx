@@ -28,7 +28,7 @@ const prodItemType = {
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
   const [cartArr, setCartArr] = useState([]);
-  console.log('cartArr ===', cartArr);
+  console.table(cartArr);
   const cartObj = {
     cItemId: genId(),
     prodId: 1,
@@ -41,24 +41,41 @@ export default function ShopPage() {
 
   const addToCart = (itemId) => {
     // surati item is prodArr kurio id yra === itemId
-    console.log('addToCard itemId ===', itemId);
+
     const foundItem = prodArr.find((pObj) => pObj.id === itemId);
     console.log('foundItem ===', foundItem);
-    // suformuoti objekta (cartObj)
-    const madeObj = {
-      cItemId: genId(),
-      prodId: foundItem.id,
-      title: foundItem.title,
-      qty: 1,
-      priceUnit: foundItem.price,
-      img: foundItem.thumbnail,
-      priceTotal: foundItem.price,
-    };
 
-    console.log('madeObj ===', madeObj);
     // ideti objekta i cart cartArr (simple)
-    setCartArr([...cartArr, madeObj]);
+    // setCartArr([...cartArr, madeObj]);
     // jei jau yra toksai objektas carte - padidinti quantity ir kaina
+    // surasti ar yra jau cart toks item
+    const isInCart = cartArr.some((cObj) => cObj.prodId === itemId);
+    console.log('isInCart ===', isInCart);
+
+    if (isInCart === true) {
+      // jei jau yra toksai objektas carte - padidinti quantity ir kaina
+      setCartArr(
+        cartArr.map((cObj) => {
+          if (cObj.prodId === itemId) {
+            // grazinti pakeista kopija
+            return { ...cObj, qty: cObj.qty + 1, priceTotal: (cObj.qty + 1) * cObj.priceUnit };
+          }
+          return cObj;
+        }),
+      );
+    } else {
+      // suformuoti objekta (cartObj)
+      const madeObj = {
+        cItemId: genId(),
+        prodId: foundItem.id,
+        title: foundItem.title,
+        qty: 1,
+        priceUnit: foundItem.price,
+        img: foundItem.thumbnail,
+        priceTotal: foundItem.price,
+      };
+      setCartArr([...cartArr, madeObj]);
+    }
   };
   const updateQtyCard = () => {
     // tures atnaujinti qty skaiciu kazkuriame objekte
