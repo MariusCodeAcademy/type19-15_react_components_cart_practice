@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { localProductsUrl, productsUrl } from '../../config';
 import ShopListItem from '../../components/shop/ShopListItem';
+import { SiHomeassistantcommunitystore } from 'react-icons/si';
 
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
@@ -50,7 +51,10 @@ export default function ShopPage() {
 
   return (
     <div className='container'>
-      <h1 className='about-heading text-4xl font-bold text-center mt-10'>Shop</h1>
+      <h1 className='about-heading text-4xl font-bold text-center mt-10'>
+        {' '}
+        <SiHomeassistantcommunitystore className='inline-block' size={'40px'} /> Shop
+      </h1>
       <p className='text-lg text-center my-4'>
         This is just like <strong>Oboulys</strong> Shop
       </p>
