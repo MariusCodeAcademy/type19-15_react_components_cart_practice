@@ -81,8 +81,10 @@ export default function ShopPage() {
   const updateQtyCard = () => {
     // tures atnaujinti qty skaiciu kazkuriame objekte
   };
-  const removeFromCart = (itemIdToRemove) => {
+  const removeFromCart = (cartItemIdToRemove) => {
     // pasalinti objeka is cartArr
+    console.log('removeFromCart', cartItemIdToRemove);
+    setCartArr((prevState) => prevState.filter((cObj) => cObj.cItemId !== cartItemIdToRemove));
   };
 
   // console.log('prodArr ===', prodArr);
@@ -128,7 +130,7 @@ export default function ShopPage() {
           </li>
           {cartArr.map((cObj) => (
             <li key={cObj.cItemId}>
-              <CartItem item={cObj} />
+              <CartItem onRemove={removeFromCart} item={cObj} />
             </li>
           ))}
         </ul>
