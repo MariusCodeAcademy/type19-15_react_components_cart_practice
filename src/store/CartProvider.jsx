@@ -10,7 +10,17 @@ const CartContext = createContext({
 CartContext.displayName = 'MaCart';
 
 export default function CartProvider({ children }) {
-  const cartCtxValue = { blabla: 500 };
+  const add = () => {
+    console.log('adding to cart');
+  };
+  const remove = (idToRemove) => {
+    console.log('removing to cart');
+  };
+
+  const cartCtxValue = {
+    add,
+    remove,
+  };
   return <CartContext.Provider value={cartCtxValue}>{children}</CartContext.Provider>;
 }
 

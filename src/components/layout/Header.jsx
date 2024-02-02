@@ -1,6 +1,9 @@
 import { NavLink, Link } from 'react-router-dom';
+import { useCartCtx } from '../../store/CartProvider';
 
 export default function Header() {
+  const cartCtx = useCartCtx();
+  console.log('cartCtx ===', cartCtx);
   return (
     <header className='bg-gray-900 text-white'>
       <div className='container mx-auto flex justify-between items-center'>
