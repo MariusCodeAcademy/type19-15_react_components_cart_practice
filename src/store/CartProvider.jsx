@@ -60,6 +60,7 @@ export default function CartProvider({ children }) {
   };
 
   const cartCtxValue = {
+    cart: cartState,
     add,
     remove,
   };

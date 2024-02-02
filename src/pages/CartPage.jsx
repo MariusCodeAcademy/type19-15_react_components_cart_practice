@@ -16,7 +16,7 @@ export default function CartPage() {
   const [cartArr, setCartArr] = useState([]);
   console.table(cartArr);
 
-  const { remove } = useCartCtx();
+  const { remove, cart } = useCartCtx();
 
   const addToCart = (itemId) => {
     // surati item is prodArr kurio id yra === itemId
@@ -72,7 +72,7 @@ export default function CartPage() {
 
       <button onClick={remove}>Remove</button>
 
-      {cartArr.length > 0 && (
+      {cart.length > 0 && (
         <ul className='my-10'>
           <li className='mb-5'>
             <div className='grid grid-cols-5'>
@@ -83,7 +83,7 @@ export default function CartPage() {
               <h3 className='uppercase text-xl'>Total</h3>
             </div>
           </li>
-          {cartArr.map((cObj) => (
+          {cart.map((cObj) => (
             <li key={cObj.cItemId}>
               <CartItem onRemove={removeFromCart} item={cObj} />
             </li>
