@@ -42,7 +42,9 @@ const cartReducer = (cartState, action) => {
         };
         return [...cartState, madeObj];
       }
-
+    case 'RM':
+      const idToRemove = action.payload;
+      return cartState.filter((cObj) => cObj.cItemId !== idToRemove);
     default:
       console.warn('no action found', action);
       return cartState;
@@ -56,7 +58,8 @@ export default function CartProvider({ children }) {
     dispach({ type: 'ADD', payload: prodObj });
   };
   const remove = (idToRemove) => {
-    console.log('removing to cart');
+    console.log('removing from cart CartProvider', idToRemove);
+    dispach({ type: 'RM', payload: idToRemove });
   };
 
   const cartCtxValue = {

@@ -18,45 +18,6 @@ export default function CartPage() {
 
   const { remove, cart } = useCartCtx();
 
-  const addToCart = (itemId) => {
-    // surati item is prodArr kurio id yra === itemId
-
-    const foundItem = prodArr.find((pObj) => pObj.id === itemId);
-    console.log('foundItem ===', foundItem);
-
-    // ideti objekta i cart cartArr (simple)
-    // setCartArr([...cartArr, madeObj]);
-    // jei jau yra toksai objektas carte - padidinti quantity ir kaina
-    // surasti ar yra jau cart toks item
-    const isInCart = cartArr.some((cObj) => cObj.prodId === itemId);
-    console.log('isInCart ===', isInCart);
-
-    if (isInCart === true) {
-      // jei jau yra toksai objektas carte - padidinti quantity ir kaina
-      setCartArr(
-        cartArr.map((cObj) => {
-          if (cObj.prodId === itemId) {
-            // grazinti pakeista kopija
-            return { ...cObj, qty: cObj.qty + 1, priceTotal: (cObj.qty + 1) * cObj.priceUnit };
-          }
-          return cObj;
-        }),
-      );
-    } else {
-      // Tokio produkto krepselyje kol kas nera tai sukuriam ir idedam
-      // suformuoti objekta (cartObj)
-      const madeObj = {
-        cItemId: genId(),
-        prodId: foundItem.id,
-        title: foundItem.title,
-        qty: 1,
-        priceUnit: foundItem.price,
-        img: foundItem.thumbnail,
-        priceTotal: foundItem.price,
-      };
-      setCartArr([...cartArr, madeObj]);
-    }
-  };
   const updateQtyCard = () => {
     // tures atnaujinti qty skaiciu kazkuriame objekte
   };
@@ -85,7 +46,7 @@ export default function CartPage() {
           </li>
           {cart.map((cObj) => (
             <li key={cObj.cItemId}>
-              <CartItem onRemove={removeFromCart} item={cObj} />
+              <CartItem onRemove={remove} item={cObj} />
             </li>
           ))}
         </ul>
