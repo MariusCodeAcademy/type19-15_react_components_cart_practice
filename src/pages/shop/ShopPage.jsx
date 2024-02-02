@@ -44,7 +44,15 @@ export default function ShopPage() {
     const foundItem = prodArr.find((pObj) => pObj.id === itemId);
     console.log('foundItem ===', foundItem);
     // suformuoti objekta (cartObj)
-    const madeObj = {};
+    const madeObj = {
+      cItemId: genId(),
+      prodId: foundItem.id,
+      title: foundItem.title,
+      qty: 1,
+      priceUnit: foundItem.price,
+      img: foundItem.thumbnail,
+      priceTotal: foundItem.price,
+    };
 
     console.log('madeObj ===', madeObj);
     // ideti objekta i cart cartArr (simple)
