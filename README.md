@@ -17,6 +17,7 @@
 ## cart
 
 1. ![](assets/2024-02-01-12-04-02.png)
+2. https://dribbble.com/shots/5311395-Shopping-Cart/attachments/1152094?mode=media ![](assets/2024-02-02-09-17-24.png)
 
 ## Cart item
 
