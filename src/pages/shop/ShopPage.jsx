@@ -4,6 +4,7 @@ import { localProductsUrl, productsUrl } from '../../config';
 import ShopListItem from '../../components/shop/ShopListItem';
 import { SiHomeassistantcommunitystore } from 'react-icons/si';
 import CartItem from '../../components/cart/CartItem';
+import { useCartCtx } from '../../store/CartProvider';
 
 const prodItemType = {
   id: 30,
@@ -26,6 +27,7 @@ const prodItemType = {
 
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
+  const { add } = useCartCtx();
 
   // console.log('prodArr ===', prodArr);
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function ShopPage() {
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
         {prodArr.map((pObj) => (
           <li key={pObj.id}>
-            <ShopListItem onAddToCart={() => {}} item={pObj} />
+            <ShopListItem onAddToCart={add} item={pObj} />
           </li>
         ))}
       </ul>

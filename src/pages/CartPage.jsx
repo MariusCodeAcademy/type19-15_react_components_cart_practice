@@ -1,6 +1,7 @@
 import { v4 as genId } from 'uuid';
 import { useState } from 'react';
 import CartItem from '../components/cart/CartItem';
+import { useCartCtx } from '../store/CartProvider';
 
 const cartObj = {
   cItemId: genId(),
@@ -14,6 +15,8 @@ const cartObj = {
 export default function CartPage() {
   const [cartArr, setCartArr] = useState([]);
   console.table(cartArr);
+
+  const { remove } = useCartCtx();
 
   const addToCart = (itemId) => {
     // surati item is prodArr kurio id yra === itemId
@@ -67,7 +70,7 @@ export default function CartPage() {
       <h1 className='about-heading text-4xl font-bold text-center mt-10'>CartPage</h1>
       <p className='text-lg text-center mt-4'>Thank for buying</p>
 
-      <button>Remove</button>
+      <button onClick={remove}>Remove</button>
 
       {cartArr.length > 0 && (
         <ul className='my-10'>
