@@ -4,6 +4,7 @@ import { localProductsUrl, productsUrl } from '../../config';
 import ShopListItem from '../../components/shop/ShopListItem';
 import { SiHomeassistantcommunitystore } from 'react-icons/si';
 import { v4 as genId } from 'uuid';
+import CartItem from '../../components/cart/CartItem';
 
 const prodItemType = {
   id: 30,
@@ -27,7 +28,7 @@ const prodItemType = {
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
   const [cartArr, setCartArr] = useState([]);
-
+  console.log('cartArr ===', cartArr);
   const cartObj = {
     cItemId: genId(),
     prodId: 1,
@@ -56,7 +57,7 @@ export default function ShopPage() {
 
     console.log('madeObj ===', madeObj);
     // ideti objekta i cart cartArr (simple)
-
+    setCartArr([...cartArr, madeObj]);
     // jei jau yra toksai objektas carte - padidinti quantity ir kaina
   };
   const updateQtyCard = () => {
@@ -66,7 +67,7 @@ export default function ShopPage() {
     // pasalinti objeka is cartArr
   };
 
-  console.log('prodArr ===', prodArr);
+  // console.log('prodArr ===', prodArr);
   useEffect(() => {
     getApiData();
   }, []);
@@ -75,7 +76,7 @@ export default function ShopPage() {
     axios
       .get(localProductsUrl)
       .then((resp) => {
-        console.log('resp.data ===', resp.data);
+        // console.log('resp.data ===', resp.data);
         const products = resp.data;
         setProdArr(products);
         // console.log('products ===', products);
@@ -90,7 +91,7 @@ export default function ShopPage() {
     <div className='container'>
       <h1 className='about-heading text-4xl font-bold text-center mt-10'>
         {' '}
-        <SiHomeassistantcommunitystore className='inline-block' size={'40px'} /> Shop {genId()}
+        <SiHomeassistantcommunitystore className='inline-block' size={'40px'} /> Shop
       </h1>
       <p className='text-lg text-center my-4'>
         This is just like <strong>Oboulys</strong> Shop
@@ -98,7 +99,9 @@ export default function ShopPage() {
 
       <ul>
         {cartArr.map((cObj) => (
-          <li key={cObj.cItemId}>Cart Item</li>
+          <li key={cObj.cItemId}>
+            <CartItem item={cObj} />
+          </li>
         ))}
       </ul>
 
