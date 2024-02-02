@@ -64,6 +64,7 @@ export default function ShopPage() {
         }),
       );
     } else {
+      // Tokio produkto krepselyje kol kas nera tai sukuriam ir idedam
       // suformuoti objekta (cartObj)
       const madeObj = {
         cItemId: genId(),
@@ -80,7 +81,7 @@ export default function ShopPage() {
   const updateQtyCard = () => {
     // tures atnaujinti qty skaiciu kazkuriame objekte
   };
-  const removeFromCard = () => {
+  const removeFromCart = (itemIdToRemove) => {
     // pasalinti objeka is cartArr
   };
 
