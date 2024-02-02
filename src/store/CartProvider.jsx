@@ -61,6 +61,19 @@ export default function CartProvider({ children }) {
     console.log('removing from cart CartProvider', idToRemove);
     dispach({ type: 'RM', payload: idToRemove });
   };
+  const update = (idToUpdate, direction) => {
+    console.log('updateting cart CartProvider', idToUpdate);
+    dispach({ type: 'UPDATE', payload: { id: idToUpdate, direcion: direction } });
+  };
+  // arba su dviem fn
+  const updateUp = (idToUpdate) => {
+    console.log('updateting cart CartProvider', idToUpdate);
+    dispach({ type: 'UPDATE', payload: idToUpdate });
+  };
+  const updateDown = (idToUpdate) => {
+    console.log('updateting cart CartProvider', idToUpdate);
+    dispach({ type: 'UPDATE', payload: idToUpdate });
+  };
 
   const cartCtxValue = {
     cart: cartState,
