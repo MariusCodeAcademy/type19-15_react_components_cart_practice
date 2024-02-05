@@ -27,9 +27,26 @@ const prodItemType = {
 
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
+  const [catFilterValue, setCatFilterValue] = useState('');
+
   const { add } = useCartCtx();
 
-  // console.log('prodArr ===', prodArr);
+  const allCategories = [];
+
+  const ourSet = new Set();
+
+  prodArr.forEach((pObj) => {
+    ourSet.add(pObj.category);
+    // jei jau tokia kategorija yra masyve
+    if (allCategories.includes(pObj.category)) {
+      return;
+    }
+    allCategories.push(pObj.category);
+  });
+  console.log('ourSet ===', ourSet);
+  console.log('allCategories ===', allCategories);
+
+  // console.table(prodArr);
   useEffect(() => {
     getApiData();
   }, []);
@@ -49,6 +66,10 @@ export default function ShopPage() {
       });
   };
 
+  // jei turim catFilterValue tai mapinam per prafiltruota prodArr
+  const filtered = '';
+  // jei catFilterValue '' tai per prodArr
+
   return (
     <div className='container'>
       <h1 className='about-heading text-4xl font-bold text-center mt-10'>
@@ -58,6 +79,18 @@ export default function ShopPage() {
       <p className='text-lg text-center my-4'>
         This is just like <strong>Oboulys</strong> Shop
       </p>
+
+      <fieldset>
+        {/* susieti su state */}
+        <select>
+          {allCategories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+          <option value=''>Laptop</option>
+        </select>
+      </fieldset>
 
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
         {prodArr.map((pObj) => (
