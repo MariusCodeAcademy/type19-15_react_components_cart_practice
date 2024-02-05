@@ -80,16 +80,26 @@ export default function ShopPage() {
         This is just like <strong>Oboulys</strong> Shop
       </p>
 
-      <fieldset>
+      <fieldset className='grid grid-cols-3 mb-5'>
         {/* susieti su state */}
-        <select>
-          {allCategories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-          <option value=''>Laptop</option>
-        </select>
+        <label>
+          Select category
+          <select className='block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+            {allCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+            <option value=''>Laptop</option>
+          </select>
+        </label>
+        <label>
+          <span>Search by title</span>
+          <input
+            className='block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+            type='search'
+          />
+        </label>
       </fieldset>
 
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
