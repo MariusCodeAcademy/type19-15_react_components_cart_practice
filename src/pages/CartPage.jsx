@@ -3,6 +3,7 @@ import { useState } from 'react';
 import CartItem from '../components/cart/CartItem';
 import { useCartCtx } from '../store/CartProvider';
 import { makePrice } from '../helper';
+import Button from '../UI/Button';
 
 const cartObj = {
   cItemId: genId(),
@@ -74,6 +75,18 @@ export default function CartPage() {
             </div>
           </li>
         </ul>
+      )}
+
+      {cart.length > 0 && (
+        <div className='bg-slate-200 p-5  inline-block'>
+          <h3 className='uppercase text-xl'>Checkout</h3>
+          <div className='border-b border-slate-900 my-4' />
+          <div className='grid grid-cols-2 gap-10 mb-9'>
+            <p>Total items: {totalItem2}</p>
+            <p>Total price: {makePrice(totalPrice)}</p>
+          </div>
+          <Button>Checkout</Button>
+        </div>
       )}
     </div>
   );
