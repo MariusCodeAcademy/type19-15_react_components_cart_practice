@@ -28,6 +28,7 @@ const prodItemType = {
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
   const [catFilterValue, setCatFilterValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   console.log('catFilterValue ===', catFilterValue);
   const { add } = useCartCtx();
 
@@ -72,16 +73,21 @@ export default function ShopPage() {
     : prodArr;
   // jei catFilterValue '' tai per prodArr
   console.log('filtered ===', filtered);
+
+  const arrAfterSearch = searchValue
+    ? filtered.filter((pObj) => pObj.title.toLowerCase().includes(searchValue.toLowerCase()))
+    : filtered;
   return (
     <div className='container'>
       <h1 className='about-heading text-4xl font-bold text-center mt-10'>
         {' '}
         <SiHomeassistantcommunitystore className='inline-block' size={'40px'} /> Shop (
-        {filtered.length})
+        {arrAfterSearch.length})
       </h1>
       <p className='text-lg text-center my-4'>
         This is just like <strong>Oboulys</strong> Shop
       </p>
+      {searchValue && <p className='text-lg text-center my-4'>Searching for: {searchValue}</p>}
 
       <fieldset className='grid grid-cols-3 mb-5'>
         {/* susieti su state */}
@@ -103,6 +109,8 @@ export default function ShopPage() {
         <label>
           <span>Search by title</span>
           <input
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
             className='block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
             type='search'
           />
@@ -110,7 +118,7 @@ export default function ShopPage() {
       </fieldset>
 
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        {filtered.map((pObj) => (
+        {arrAfterSearch.map((pObj) => (
           <li key={pObj.id}>
             <ShopListItem onAddToCart={() => add(pObj)} item={pObj} />
           </li>
