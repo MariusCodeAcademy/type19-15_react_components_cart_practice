@@ -52,6 +52,8 @@ const cartReducer = (cartState, action) => {
 };
 export default function CartProvider({ children }) {
   const [cartState, dispach] = useReducer(cartReducer, []);
+  const itemsInCart = cartState.length;
+  console.log('itemsInCart ===', itemsInCart);
   console.table(cartState);
   const add = (prodObj) => {
     // console.log('adding to cart', prodObj);

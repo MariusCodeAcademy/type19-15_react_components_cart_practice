@@ -2,8 +2,8 @@ import { NavLink, Link } from 'react-router-dom';
 import { useCartCtx } from '../../store/CartProvider';
 
 export default function Header() {
-  const cartCtx = useCartCtx();
-  console.log('cartCtx ===', cartCtx);
+  const { cart } = useCartCtx();
+
   return (
     <header className='bg-gray-900 text-white'>
       <div className='container mx-auto flex justify-between items-center'>
@@ -24,7 +24,7 @@ export default function Header() {
             Shop
           </NavLink>
           <NavLink className='block p-4 hover:bg-gray-800' to='/cart'>
-            Cart
+            Cart {cart.length ? `(${cart.length})` : ''}
           </NavLink>
         </nav>
       </div>
