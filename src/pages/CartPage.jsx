@@ -13,19 +13,35 @@ const cartObj = {
   priceTotal: 799,
 };
 export default function CartPage() {
-  const [cartArr, setCartArr] = useState([]);
-  console.table(cartArr);
-
   const { remove, cart } = useCartCtx();
 
-  const updateQtyCard = () => {
-    // tures atnaujinti qty skaiciu kazkuriame objekte
+  const totalItems = () => {
+    let count = 0;
+    cart.forEach((cObj) => {
+      console.log('cObj.qty ===', cObj.qty);
+      count += cObj.qty;
+    });
+    // reduce
+    console.log('count ===', count);
+    return count;
   };
-  const removeFromCart = (cartItemIdToRemove) => {
-    // pasalinti objeka is cartArr
-    console.log('removeFromCart', cartItemIdToRemove);
-    setCartArr((prevState) => prevState.filter((cObj) => cObj.cItemId !== cartItemIdToRemove));
-  };
+
+  const totalItem2 = cart.reduce((total, cObj) => total + cObj.qty, 0);
+  console.log('totalItem2 ===', totalItem2);
+
+  const totalPrice = cart.map((cObj) => cObj.priceTotal).reduce((total, suma) => total + suma, 0);
+
+  const totals = cart.reduce(
+    (totalObj, cObj) => {
+      totalObj.totalCount += cObj.qty;
+      totalObj.totalSum += cObj.priceTotal;
+      return totalObj;
+    },
+    { totalCount: 0, totalSum: 0 },
+  );
+  console.log('totals ===', totals);
+
+  console.log('totalPrice ===', totalPrice);
   return (
     <div className='container'>
       <h1 className='about-heading text-4xl font-bold text-center mt-10'>CartPage</h1>
@@ -47,6 +63,15 @@ export default function CartPage() {
               <CartItem onRemove={remove} item={cObj} />
             </li>
           ))}
+          <li className='mb-5'>
+            <div className='grid grid-cols-5'>
+              <h3 className='font-semibold text-lg'></h3>
+              <h3 className='font-semibold text-lg'></h3>
+              <h3 className='font-semibold text-lg'>Total items: {totalItems()}</h3>
+              <h3 className='font-semibold text-lg'></h3>
+              <h3 className='font-semibold text-lg'>Total Price: {totalPrice}</h3>
+            </div>
+          </li>
         </ul>
       )}
     </div>
