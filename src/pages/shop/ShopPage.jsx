@@ -52,13 +52,15 @@ export default function ShopPage() {
     getApiData();
   }, []);
 
+  // pasidaryti puslapiavima ?limit=10&skip=0
+
   const getApiData = () => {
     axios
-      .get(localProductsUrl)
+      .get(`${productsUrl}?limit=10&skip=0`)
       .then((resp) => {
-        // console.log('resp.data ===', resp.data);
-        const products = resp.data;
-        setProdArr(products);
+        console.log('resp.data ===', resp.data);
+        // const products = resp.data;
+        setProdArr(resp.data.products);
         // console.log('products ===', products);
         // console.log(JSON.stringify(products, null, 2));
       })
@@ -124,6 +126,9 @@ export default function ShopPage() {
           </li>
         ))}
       </ul>
+      <div>
+        <button>prev</button> 1 2 3 4 <button>next</button>
+      </div>
     </div>
   );
 }
