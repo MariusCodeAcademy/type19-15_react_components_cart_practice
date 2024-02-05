@@ -1,3 +1,4 @@
+import { makePrice } from '../../helper';
 import { useCartCtx } from '../../store/CartProvider';
 
 const itemObj = {
@@ -34,8 +35,8 @@ export default function CartItem({ item, onRemove }) {
           -
         </button>
       </div>
-      <p className='font-semibold'>{item.priceUnit}</p>
-      <p className='font-semibold'>{item.priceTotal}</p>
+      <p className='font-semibold'>{makePrice(item.priceUnit)}</p>
+      <p className='font-semibold'>{makePrice(item.priceTotal)}</p>
     </div>
   );
 }

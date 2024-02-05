@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../UI/Button';
 import { PiShoppingCartThin } from 'react-icons/pi';
 import { FaBookReader } from 'react-icons/fa';
+import { makePrice } from '../../helper';
 
 const itemType = {
   id: 30,
@@ -35,7 +36,7 @@ export default function ShopListItem({ item, onAddToCart }) {
       </Link>
       <div className='text-sm text-slate-700'>
         <h3 className=''>{item.title}</h3>
-        <p className='text-gray-400 my-3'>{item.price.toFixed(2)} $</p>
+        <p className='text-gray-400 my-3'>{makePrice(item.price)}</p>
         <p>
           Category: <span className='font-semibold'>{item.category}</span>
         </p>

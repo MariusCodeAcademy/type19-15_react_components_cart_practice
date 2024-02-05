@@ -2,6 +2,7 @@ import { v4 as genId } from 'uuid';
 import { useState } from 'react';
 import CartItem from '../components/cart/CartItem';
 import { useCartCtx } from '../store/CartProvider';
+import { makePrice } from '../helper';
 
 const cartObj = {
   cItemId: genId(),
@@ -67,9 +68,9 @@ export default function CartPage() {
             <div className='grid grid-cols-5'>
               <h3 className='font-semibold text-lg'></h3>
               <h3 className='font-semibold text-lg'></h3>
-              <h3 className='font-semibold text-lg'>Total items: {totalItems()}</h3>
+              <h3 className='font-semibold text-lg'>Total items: {totalItem2}</h3>
               <h3 className='font-semibold text-lg'></h3>
-              <h3 className='font-semibold text-lg'>Total Price: {totalPrice}</h3>
+              <h3 className='font-semibold text-lg'>Total Price: {makePrice(totalPrice)}</h3>
             </div>
           </li>
         </ul>
