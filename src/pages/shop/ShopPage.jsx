@@ -28,7 +28,7 @@ const prodItemType = {
 export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
   const [catFilterValue, setCatFilterValue] = useState('');
-
+  console.log('catFilterValue ===', catFilterValue);
   const { add } = useCartCtx();
 
   const allCategories = [];
@@ -67,14 +67,17 @@ export default function ShopPage() {
   };
 
   // jei turim catFilterValue tai mapinam per prafiltruota prodArr
-  const filtered = '';
+  const filtered = catFilterValue
+    ? prodArr.filter((pObj) => pObj.category === catFilterValue)
+    : prodArr;
   // jei catFilterValue '' tai per prodArr
-
+  console.log('filtered ===', filtered);
   return (
     <div className='container'>
       <h1 className='about-heading text-4xl font-bold text-center mt-10'>
         {' '}
-        <SiHomeassistantcommunitystore className='inline-block' size={'40px'} /> Shop
+        <SiHomeassistantcommunitystore className='inline-block' size={'40px'} /> Shop (
+        {filtered.length})
       </h1>
       <p className='text-lg text-center my-4'>
         This is just like <strong>Oboulys</strong> Shop
@@ -84,13 +87,17 @@ export default function ShopPage() {
         {/* susieti su state */}
         <label>
           Select category
-          <select className='block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+          <select
+            onChange={(e) => setCatFilterValue(e.target.value)}
+            value={catFilterValue}
+            className='block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+            <option value=''>All categories</option>
+            {/* <option value=''>All</option> */}
             {allCategories.map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
               </option>
             ))}
-            <option value=''>Laptop</option>
           </select>
         </label>
         <label>
@@ -103,7 +110,7 @@ export default function ShopPage() {
       </fieldset>
 
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        {prodArr.map((pObj) => (
+        {filtered.map((pObj) => (
           <li key={pObj.id}>
             <ShopListItem onAddToCart={() => add(pObj)} item={pObj} />
           </li>
