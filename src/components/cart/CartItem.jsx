@@ -11,7 +11,7 @@ const itemObj = {
 };
 
 export default function CartItem({ item, onRemove }) {
-  const { updateUp } = useCartCtx();
+  const { updateUp, updateDown } = useCartCtx();
   return (
     <div className='grid grid-cols-5 border items-center mb-2 py-1 pl-1'>
       <img className='h-16 w-16 object-cover' src={item.img} alt={item.title} />
@@ -28,7 +28,9 @@ export default function CartItem({ item, onRemove }) {
           +
         </button>
         <p className='w-8 text-center text-xl font-semibold'>{item.qty}</p>
-        <button className='border hover:bg-indigo-50 border-indigo-500 rounded-sm w-8  py-0 leading-none text-2xl'>
+        <button
+          onClick={() => updateDown(item.cItemId)}
+          className='border hover:bg-indigo-50 border-indigo-500 rounded-sm w-8  py-0 leading-none text-2xl'>
           -
         </button>
       </div>

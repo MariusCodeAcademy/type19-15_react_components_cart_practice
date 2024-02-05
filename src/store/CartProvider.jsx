@@ -7,6 +7,7 @@ const CartContext = createContext({
   remove() {},
   update() {},
   updateUp(id) {},
+  updateDown(id) {},
 });
 
 CartContext.displayName = 'MaCart';
@@ -65,6 +66,22 @@ const cartReducer = (cartState, action) => {
           return cObj;
         }
       });
+    case 'UPDATE_DOWN':
+      // patikrinti ar qty yra 0
+      const currentQty = cartState.find((cObj) => cObj.cItemId === action.payload).qty;
+      console.log('currentQty ===', currentQty);
+      // jei yra tai remove
+      if (currentQty === 0) {
+        return cartState.filter((cObj) => cObj.cItemId !== action.payload);
+      }
+      return cartState.map((cObj) => {
+        if (cObj.cItemId === action.payload) {
+          // grazinti pakeista
+          return { ...cObj, qty: cObj.qty - 1, priceTotal: (cObj.qty - 1) * cObj.priceUnit };
+        } else {
+          return cObj;
+        }
+      });
     default:
       console.warn('no action found', action);
       return cartState;
@@ -93,8 +110,8 @@ export default function CartProvider({ children }) {
     dispach({ type: 'UPDATE_UP', payload: idToUpdate });
   };
   const updateDown = (idToUpdate) => {
-    console.log('updateting cart CartProvider', idToUpdate);
-    dispach({ type: 'UPDATE', payload: idToUpdate });
+    console.log('UPDATE_DOWN', idToUpdate);
+    dispach({ type: 'UPDATE_DOWN', payload: idToUpdate });
   };
 
   const cartCtxValue = {
@@ -102,6 +119,7 @@ export default function CartProvider({ children }) {
     add,
     remove,
     updateUp,
+    updateDown,
   };
   return <CartContext.Provider value={cartCtxValue}>{children}</CartContext.Provider>;
 }
