@@ -6,9 +6,20 @@ const CartContext = createContext({
   add(prodObj) {},
   remove() {},
   update() {},
+  updateUp(id) {},
 });
 
 CartContext.displayName = 'MaCart';
+
+const cartObj = {
+  cItemId: genId(),
+  prodId: 1,
+  title: 'Iphone',
+  qty: 1,
+  priceUnit: 799,
+  img: 'blabla.jpg',
+  priceTotal: 799,
+};
 
 const cartReducer = (cartState, action) => {
   switch (action.type) {
@@ -45,6 +56,15 @@ const cartReducer = (cartState, action) => {
     case 'RM':
       const idToRemove = action.payload;
       return cartState.filter((cObj) => cObj.cItemId !== idToRemove);
+    case 'UPDATE_UP':
+      return cartState.map((cObj) => {
+        if (cObj.cItemId === action.payload) {
+          // grazinti pakeista
+          return { ...cObj, qty: cObj.qty + 1, priceTotal: (cObj.qty + 1) * cObj.priceUnit };
+        } else {
+          return cObj;
+        }
+      });
     default:
       console.warn('no action found', action);
       return cartState;
@@ -70,7 +90,7 @@ export default function CartProvider({ children }) {
   // arba su dviem fn
   const updateUp = (idToUpdate) => {
     console.log('updateting cart CartProvider', idToUpdate);
-    dispach({ type: 'UPDATE', payload: idToUpdate });
+    dispach({ type: 'UPDATE_UP', payload: idToUpdate });
   };
   const updateDown = (idToUpdate) => {
     console.log('updateting cart CartProvider', idToUpdate);
@@ -81,6 +101,7 @@ export default function CartProvider({ children }) {
     cart: cartState,
     add,
     remove,
+    updateUp,
   };
   return <CartContext.Provider value={cartCtxValue}>{children}</CartContext.Provider>;
 }
