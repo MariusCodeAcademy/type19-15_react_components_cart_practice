@@ -16,3 +16,9 @@
 1. prideti rikiavimo filtra pagal kaina
 2. prideti rikiavimo filtra pagal pasirinkima is select
 3. prideti selecta su kategorijos kuris issfiltruoja prekes
+
+CI/CD
+countinious integration
+countinious deployment
+
+patalpinti dar viena savo react projekta netlify

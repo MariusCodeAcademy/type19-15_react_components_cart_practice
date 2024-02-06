@@ -7,6 +7,7 @@ export default function HomePage() {
         features and services. Explore our website to discover more and get started on your journey
         with us. We are excited to have you here!
       </p>
+      <img className='border p-4 ' src='/newyork.jpg' alt='town' />
     </div>
   );
 }
