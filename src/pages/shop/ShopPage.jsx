@@ -5,6 +5,7 @@ import ShopListItem from '../../components/shop/ShopListItem';
 import { SiHomeassistantcommunitystore } from 'react-icons/si';
 import CartItem from '../../components/cart/CartItem';
 import { useCartCtx } from '../../store/CartProvider';
+import Button from '../../UI/Button';
 
 const prodItemType = {
   id: 30,
@@ -29,6 +30,7 @@ export default function ShopPage() {
   const [prodArr, setProdArr] = useState([]);
   const [catFilterValue, setCatFilterValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [limit, setLimit] = useState(10);
   console.log('catFilterValue ===', catFilterValue);
   const { add } = useCartCtx();
 
@@ -49,14 +51,17 @@ export default function ShopPage() {
 
   // console.table(prodArr);
   useEffect(() => {
-    getApiData();
-  }, []);
+    getApiData(`${productsUrl}?limit=${limit}&skip=0`);
+  }, [limit]);
 
+  const loadMoreHandler = () => {
+    setLimit(limit + 5);
+  };
   // pasidaryti puslapiavima ?limit=10&skip=0
 
-  const getApiData = () => {
+  const getApiData = (url) => {
     axios
-      .get(`${productsUrl}?limit=10&skip=0`)
+      .get(url)
       .then((resp) => {
         console.log('resp.data ===', resp.data);
         // const products = resp.data;
@@ -126,6 +131,7 @@ export default function ShopPage() {
           </li>
         ))}
       </ul>
+      <Button onClick={loadMoreHandler}>Load more</Button>
       <div>
         <button>prev</button> 1 2 3 4 <button>next</button>
       </div>
